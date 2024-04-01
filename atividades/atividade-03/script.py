@@ -18,10 +18,9 @@ while True:
         
     id_muni = input("Qual município você deseja ver a localização?: ")
     
-    id_muni_check = int(id_muni)
-    
-    if id_muni_check > x:
+    if int(id_muni) > x:
         print("Você não pode colocar um número maior do que está disponível")
+        print("")
         continue
 
     lati = conn.execute("SELECT latitude from TB_MUNICIPIOS WHERE id=" + id_muni)
@@ -36,6 +35,7 @@ while True:
         
     if (latitude == "") or (longitude == ""):
         print("Esse município ainda não foi completado")
+        print("")
         continue
     else:
         latitude_list.append(latitude)
