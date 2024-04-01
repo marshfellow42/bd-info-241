@@ -1,5 +1,5 @@
 # Atividade-03
-### Equipe
+### Equipe 6 : Meso 4
 - Leandro Cândido
 - Marina Silva
 - Ana Lívia
