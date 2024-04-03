@@ -3,8 +3,8 @@ import webbrowser
 
 conn = sqlite3.connect('project_DB.db')
 
-latitude_list = []
-longitude_list = []
+latitude_result = ""
+longitude_result = ""
 
 while True:
     consulta = conn.execute("SELECT nome FROM TB_MUNICIPIOS")
@@ -38,10 +38,10 @@ while True:
         print("")
         continue
     else:
-        latitude_list.append(latitude)
-        longitude_list.append(longitude)
+        latitude_result = latitude
+        longitude_result = longitude
         break
 
-url = "https://epsg.io/map#srs=4326&x=" + latitude_list[0] + "&y=" + longitude_list[0] + "&z=15&layer=streets"
+url = "https://epsg.io/map#srs=4326&x=" + latitude_result + "&y=" + longitude_result + "&z=15&layer=streets"
 
 webbrowser.open(url, new=0)
