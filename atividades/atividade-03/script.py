@@ -1,7 +1,7 @@
 import sqlite3
 import webbrowser
 
-conn = sqlite3.connect('project_DB.db')
+conn = sqlite3.connect('atividades/atividade-03/project_DB.db')
 
 latitude_result = ""
 longitude_result = ""
@@ -26,12 +26,18 @@ while True:
     lati = conn.execute("SELECT latitude from TB_MUNICIPIOS WHERE id=" + id_muni)
 
     for row in lati:
-        latitude = row[0]
+        if type(row[0]) == str:
+            latitude = row[0]
+        else:
+            latitude = str(row[0])
         
     longi = conn.execute("SELECT longitude from TB_MUNICIPIOS WHERE id=" + id_muni)
 
     for row in longi:
-        longitude = row[0]
+        if type(row[0]) == str:
+            longitude = row[0]
+        else:
+            longitude = str(row[0])
         
     if (latitude == "") or (longitude == ""):
         print("Esse município ainda não foi completado")
