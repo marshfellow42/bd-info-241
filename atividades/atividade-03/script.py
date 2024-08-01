@@ -1,7 +1,12 @@
 import sqlite3
 import webbrowser
+import os
 
-conn = sqlite3.connect('atividades/atividade-03/project_DB.db')
+script_dir = os.path.realpath(os.path.dirname(__file__))
+
+db_path = os.path.join(script_dir, 'project_DB.db')
+
+conn = sqlite3.connect(db_path)
 
 latitude_result = ""
 longitude_result = ""
