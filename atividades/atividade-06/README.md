@@ -36,8 +36,12 @@ E rode o programa `rode_isso_primeiro.py` como o arquivo principal, para assegur
 ### Criar aluno
 
 ```bash
-curl -X POST "http://127.0.0.1:8000/criar_aluno/" -H "Content-Type: application/json" -d "{\"aluno\": \"João da Silva\", \"endereco\": \"Rua das Flores, 123\"}"
+curl -X POST "http://127.0.0.1:8000/criar_aluno/?aluno=Jo%C3%A3o%20da%20Silva&endereco=Rua%20das%20Flores%2C%20123" -H "accept: application/json" -d ""
 ```
+
+<p><small>O nome do aluno e o endereço precisando ser encodados com um padrão em que a URL consiga entender</small></p>
+
+<p><small>Esse <a href="https://emn178.github.io/online-tools/url_encode.html">website</a> permite facilitar o processo de encodar o texto para o padrão da URL</small></p>
 
 ### Listar todos os alunos
 
@@ -56,7 +60,7 @@ curl -X GET "http://127.0.0.1:8000/listar_um_aluno/1"
 ### Atualizar um Aluno
 
 ```bash
-curl -X PUT "http://127.0.0.1:8000/atualizar_aluno/1" -H "Content-Type: application/json" -d "{\"aluno\": \"João da Silva Júnior\", \"endereco\": \"Rua das Flores, 456\"}"
+curl -X PUT "http://127.0.0.1:8000/atualizar_aluno/1?aluno=Jo%C3%A3o%20da%20Silva&endereco=Rua%20das%20Flores%2C%20124" -H "accept: application/json"
 ```
 
 ### Excluir um Aluno
