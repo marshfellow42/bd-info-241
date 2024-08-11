@@ -1,29 +1,22 @@
 # Atividade-06
-Desenvolver um Backend Python que usa FASTAPI 
+
+Desenvolver um Backend Python que usa FASTAPI
 
 Como um programador Python, crie uma aplicação backend que usa o framework FASTAPI seguindo os seguintes passos:
 
-1) Crie um banco de dados SQLITE3 com o nome dbalunos.db.
+1. Crie um banco de dados SQLITE3 com o nome `dbalunos.db`.
 
-2) Crie uma entidade aluno que será persistida em uma tabela TB_ALUNO com os seguintes campos:
-<br>
-`id` chave primária do tipo inteiro com autoincremento;
-<br>
-`aluno_nome` do tipo string com tamanho 50;
-<br>
-`endereço` do tipo string com tamanho 100;
+2. Crie uma entidade `aluno` que será persistida em uma tabela `TB_ALUNO` com os seguintes campos:
+    - `id`: chave primária do tipo inteiro com autoincremento;
+    - `aluno_nome`: do tipo string com tamanho 50;
+    - `endereco`: do tipo string com tamanho 100;
 
-3) Crie os seguintes endpoints FASTAPI abaixo descritos:
-<br> 
-a) criar_aluno grava dados de um objeto aluno na tabela TB_ALUNO;
-<br>
-b) listar_alunos ler todos os registros da tabela TB_ALUNO;
-<br>
-c) listar_um_aluno ler um registro da tabela TB_ALUNO a partir do campo id;
-<br> 
-d) atualizar_aluno atualiza um registro da tabela TB_ALUNO a partir de um campo id e dos dados de uma entidade aluno;
-<br>
-e) excluir_aluno exclui um registro da tabela TB_ALUNO a partir de um campo id e dos dados de uma entidade aluno;
+3. Crie os seguintes endpoints FASTAPI abaixo descritos:
+    - `criar_aluno`: grava dados de um objeto aluno na tabela `TB_ALUNO`;
+    - `listar_alunos`: lê todos os registros da tabela `TB_ALUNO`;
+    - `listar_um_aluno`: lê um registro da tabela `TB_ALUNO` a partir do campo `id`;
+    - `atualizar_aluno`: atualiza um registro da tabela `TB_ALUNO` a partir de um campo `id` e dos dados de uma entidade aluno;
+    - `excluir_aluno`: exclui um registro da tabela `TB_ALUNO` a partir de um campo `id` e dos dados de uma entidade aluno;
 
 ---
 
