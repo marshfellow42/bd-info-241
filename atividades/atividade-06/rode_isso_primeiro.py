@@ -38,8 +38,8 @@ def initialize_db():
         conn.execute('''
             CREATE TABLE IF NOT EXISTS TB_ALUNO (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                aluno varchar(50),
-                endereco varchar(100)
+                aluno_nome VARCHAR(50),
+                endereco VARCHAR(100)
             );
         ''')
 

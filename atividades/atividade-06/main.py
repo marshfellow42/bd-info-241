@@ -14,10 +14,10 @@ def get_db_connection():
     return conn
 
 @app.post("/criar_aluno/")
-def criar_aluno(aluno: str = None,  endereco: str = None):
+def criar_aluno(aluno_nome: str = None,  endereco: str = None):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO TB_ALUNO (aluno, endereco) VALUES (?, ?)', (aluno, endereco))
+    cursor.execute('INSERT INTO TB_ALUNO (aluno_nome, endereco) VALUES (?, ?)', (aluno_nome, endereco))
     conn.commit()
     conn.close()
     return {"message": "Aluno criado com sucesso"}
@@ -43,10 +43,10 @@ def listar_um_aluno(id: int):
     return dict(aluno)
 
 @app.put("/atualizar_aluno/{id}")
-def atualizar_aluno(id: int, aluno: str = None,  endereco: str = None):
+def atualizar_aluno(id: int, aluno_nome: str = None,  endereco: str = None):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('UPDATE TB_ALUNO SET aluno = ?, endereco = ? WHERE id = ?', (aluno, endereco, id))
+    cursor.execute('UPDATE TB_ALUNO SET aluno_nome = ?, endereco = ? WHERE id = ?', (aluno_nome, endereco, id))
     conn.commit()
     conn.close()
     if cursor.rowcount == 0:
@@ -68,7 +68,7 @@ def excluir_aluno(id: int):
     cursor.execute('SELECT COUNT(*) FROM TB_ALUNO')
     row_count = cursor.fetchone()[0]
 
-    # Resetar a sequência do ID caso não exista nenhum aluno
+    # Resetar a sequência do ID caso não exista nenhum aluno no banco de dados
     # Para evitar a gambiarra do Arthur de colocar o ID junto com atualizar_aluno por causa disso
     if row_count == 0:
         cursor.execute('''
