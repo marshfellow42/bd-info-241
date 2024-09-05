@@ -14,7 +14,7 @@ def get_db_connection():
     return conn
 
 @app.post("/criar_aluno/")
-def criar_aluno(aluno_nome: str = None,  endereco: str = None):
+def criar_aluno(aluno_nome: str = None, endereco: str = None):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('INSERT INTO TB_ALUNO (aluno_nome, endereco) VALUES (?, ?)', (aluno_nome, endereco))
@@ -43,7 +43,7 @@ def listar_um_aluno(id: int):
     return dict(aluno)
 
 @app.put("/atualizar_aluno/{id}")
-def atualizar_aluno(id: int, aluno_nome: str = None,  endereco: str = None):
+def atualizar_aluno(id: int, aluno_nome: str = None, endereco: str = None):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('UPDATE TB_ALUNO SET aluno_nome = ?, endereco = ? WHERE id = ?', (aluno_nome, endereco, id))
