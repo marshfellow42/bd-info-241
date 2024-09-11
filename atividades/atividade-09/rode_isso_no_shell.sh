@@ -46,13 +46,19 @@ pip install mysql-connector-python
 
 echo
 
+# É o equivalente a um sleep 60, só que mais bonito
+# Esse sleep 60, é necessário pois após o MySQL ser instalado pelo Docker Compose, ele ainda precisa de um tempo extra para poder fazer as finalizações dele
+# E se o script executar tudo muito rápido, ele basicamente não roda nada no MySQL
+
+# Esse for loop faz basicamente um loop 40 vezes, e nessas 40 vezes ele adiciona um sleep 0.5
+# Ou seja, (0,5 * 3) * 40 = 60s = 1min
 show_progress() {
     for i in {1..40}; do
-        echo -ne "Iniciando o Servidor MySQL.   \r"
+        echo -ne "Iniciando o servidor MySQL.   \r"
         sleep 0.5
-        echo -ne "Iniciando o Servidor MySQL..  \r"
+        echo -ne "Iniciando o servidor MySQL..  \r"
         sleep 0.5
-        echo -ne "Iniciando o Servidor MySQL... \r"
+        echo -ne "Iniciando o servidor MySQL... \r"
         sleep 0.5
         echo -ne "\r"
     done

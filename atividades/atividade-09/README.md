@@ -5,6 +5,7 @@ Usar as informações definidas na Avaliação-08 e o prompt da aula do dia 09-0
 Executar o programa Python no ambiente do Play with Docker incluindo a seguinte funcionalidade:
 
 Ler todos os registros da tabela `TB_ALUNOS` e mostrar o status de Aprovação. Usando a seguinte lógica:
+
 - Se o numero de faltas for maior ou igual a 20 setar o atributo Aprovado_SN com FALSO (REPROVADO);
 - Se a média Aritmética de N1 e N2 for < 6.0 setar o atributo Aprovado_SN com FALSO (REPROVADO);
 
@@ -75,8 +76,14 @@ mycursor.close()
 mydb.close()
 ```
 
-Para executar o arquivo .sh, você primeiro precisa entrar na pasta `bd-info-241/atividades/atividade-09`
+## Como executar o código no Play with Docker?
 
-Depois você executa o comando `chmod +x rode_isso_no_shell.sh` para fazer o script executável
+Para executar o arquivo `.sh`, você precisa rodar esse código no terminal
 
-Para rodar o script só execute o comando `./rode_isso_no_shell.sh`
+```bash
+git clone https://github.com/marshfellow42/bd-info-241.git
+
+chmod +x bd-info-241/atividades/atividade-09/rode_isso_no_shell.sh
+
+./bd-info-241/atividades/atividade-09/rode_isso_no_shell.sh
+```
