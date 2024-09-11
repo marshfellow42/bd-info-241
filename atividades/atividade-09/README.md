@@ -68,3 +68,9 @@ for item in meuresultado:
 mycursor.close()
 mydb.close()
 ```
+
+Para executar o arquivo .sh, você primeiro precisa entrar na pasta `bd-info-241/atividades/atividade-09`
+
+Depois você executa o comando `chmod +x rode_isso_no_shell.sh` para fazer o script executável
+
+Para rodar o script só execute o comando `./rode_isso_no_shell.sh`
