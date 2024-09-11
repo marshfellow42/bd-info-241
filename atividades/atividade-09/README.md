@@ -76,7 +76,7 @@ mycursor.close()
 mydb.close()
 ```
 
-## Como executar o código no Play with Docker?
+## Como executar o código no [Play with Docker](https://labs.play-with-docker.com/)?
 
 Para executar o arquivo `.sh`, você precisa rodar esse código no terminal
 
