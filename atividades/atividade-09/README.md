@@ -8,6 +8,12 @@ Ler todos os registros da tabela `TB_ALUNOS` e mostrar o status de Aprovação. 
 - Se o numero de faltas for maior ou igual a 20 setar o atributo Aprovado_SN com FALSO (REPROVADO);
 - Se a média Aritmética de N1 e N2 for < 6.0 setar o atributo Aprovado_SN com FALSO (REPROVADO);
 
+Antes de executar o arquivo Python, você precisa baixar um "driver" para o Python:
+
+```bash
+pip install mysql-connector-python
+```
+
 O código Python para rodar esse registro é esse:
 
 ```python
