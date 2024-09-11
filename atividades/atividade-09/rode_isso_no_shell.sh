@@ -38,7 +38,7 @@ volumes:
   mysql_data:
 EOF
 
-docker login -u leanc -p arcoeflecha
+docker login
 
 docker-compose up -d
 
