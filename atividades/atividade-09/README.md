@@ -70,15 +70,23 @@ mycursor.execute("SELECT * FROM TB_ALUNOS")
 meuresultado = mycursor.fetchall()
 
 for item in meuresultado:
-    print(item)
+    id, nome, nota_N1, nota_N2, media, faltas, aprovado_sn = item
+
+    status = "APROVADO" if aprovado_sn else "REPROVADO"
+    
+    print(f"Aluno: {nome}, Nota N1: {nota_N1}, Nota N2: {nota_N2}, Media: {media}, Faltas: {faltas}, Status: {status}")
+
+    print()
 
 mycursor.close()
 mydb.close()
 ```
 
-## Como executar o código no [Play with Docker](https://labs.play-with-docker.com/)?
+## Como executar o código Python no [Play with Docker](https://labs.play-with-docker.com/)?
 
-Para executar o arquivo `.sh`, você precisa rodar esse código no terminal
+Para executar o código Python no Play with Docker, você primeiro precisa rodar o script `.sh`, pois esse script contém os pré-requisitos para você rodar o código sem ter erros.
+
+Para rodar esse script, você precisa executar esses comandos no terminal:
 
 ```bash
 git clone https://github.com/marshfellow42/bd-info-241.git

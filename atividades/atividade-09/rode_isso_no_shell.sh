@@ -38,9 +38,31 @@ volumes:
   mysql_data:
 EOF
 
-docker login
+echo
+
+# Esse while True serve para só progredir quando o usuário colocar o login dele corretamente, caso contrário, o script inteiro não irá rodar pela falta de dependências necessárias
+
+# $? armazena o código de saída do último comando executado
+# 0 indica que o comando foi bem-sucedido
+# Qualquer valor diferente de 0 indica que houve um erro
+# A comparação [-eq] verifica se $? "é igual a" 0
+# Se for igual a 0, significa que o último comando executou com sucesso
+
+# Ou seja, ele verifica se o último comando foi bem-sucedido (exit status 0)
+while true; do
+    docker login
+    if [ $? -eq 0 ]; then
+        break
+    else
+        echo
+    fi
+done
+
+echo
 
 docker-compose up -d
+
+echo
 
 pip install mysql-connector-python
 
@@ -125,10 +147,19 @@ mycursor.execute("SELECT * FROM TB_ALUNOS")
 meuresultado = mycursor.fetchall()
 
 for item in meuresultado:
-    print(item)
+    id, nome, nota_N1, nota_N2, media, faltas, aprovado_sn = item
+
+    status = "APROVADO" if aprovado_sn else "REPROVADO"
+    
+    print(f"Aluno: {nome}, Nota N1: {nota_N1}, Nota N2: {nota_N2}, Media: {media}, Faltas: {faltas}, Status: {status}")
+
+    print()
 
 mycursor.close()
 mydb.close()
 EOF
+
+# Esse sleep é desnecessário e perde o tempo de todo mundo, mas eu achei interessante colocar para o usuário se preparar para vir uma porrada de informação do banco de dados de uma vez só
+sleep 1
 
 python arquivo.py
