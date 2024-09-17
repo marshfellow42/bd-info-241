@@ -173,11 +173,11 @@ def read_data_on_table(tabela):
                 # Exemplo: f"Faltas:{Fore.GREEN if faltas < 10 else Fore.YELLOW if faltas <= 20 else Fore.RED} {faltas} {Fore.RESET}"
                 print(f"Aluno: {nome_aluno}, "
                     f"Professor: {nome_professor}, "
-                    f"Disciplina: {disciplina_color} {nome_disciplina} {Fore.RESET}, "
-                    f"Nota N1: {nota_n1_color} {nota_N1} {Fore.RESET}, "
-                    f"Nota N2: {nota_n2_color} {nota_N2} {Fore.RESET}, "
-                    f"Faltas:{faltas_color} {faltas} {Fore.RESET}, "
-                    f"Status:{status_color} {status} {Style.RESET_ALL}")
+                    f"Disciplina:{disciplina_color} {nome_disciplina}{Fore.RESET}, "
+                    f"Nota N1:{nota_n1_color} {nota_N1}{Fore.RESET}, "
+                    f"Nota N2:{nota_n2_color} {nota_N2}{Fore.RESET}, "
+                    f"Faltas:{faltas_color} {faltas}{Fore.RESET}, "
+                    f"Status:{status_color} {status}{Style.RESET_ALL}")
 
 # Update
 def update_data_on_table(tabela):
