@@ -124,6 +124,7 @@ mycursor.execute("""CREATE TABLE IF NOT EXISTS Matricula (
     id_disciplina INT,
     nota_N1 FLOAT,
     nota_N2 FLOAT,
+    media FLOAT,
     faltas INT,
     Aprovado_SN BOOLEAN,
     FOREIGN KEY (id_aluno) REFERENCES TB_ALUNOS(id),
@@ -166,7 +167,7 @@ def create_data_on_table(tabela):
             else:
                 aprovado_sn = True
 
-            mycursor.execute("INSERT INTO Matricula (id_aluno, id_professor, id_disciplina, nota_N1, nota_N2, faltas, Aprovado_SN) VALUES (%s, %s, %s, %s, %s, %s, %s);", (nome_aluno, nome_professor, disciplina, nota_N1, nota_N2, faltas, aprovado_sn))
+            mycursor.execute("INSERT INTO Matricula (id_aluno, id_professor, id_disciplina, nota_N1, nota_N2, media, faltas, Aprovado_SN) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);", (nome_aluno, nome_professor, disciplina, nota_N1, nota_N2, media_parcial, faltas, aprovado_sn))
             mydb.commit()
 
 # Read
@@ -178,18 +179,21 @@ def read_data_on_table(tabela):
         case "TB_ALUNOS":
             for item in meuresultado:
                 id, nome = item
-                print(f"Aluno: {nome}")
+                print(f"ID: {id}, ",
+                    f"Aluno: {nome}")
         case "TB_PROFESSOR":
             for item in meuresultado:
                 id, nome = item
-                print(f"Professor: {nome}")
+                print(f"ID: {id}, ",
+                    f"Professor: {nome}")
         case "TB_DISCIPLINA":
             for item in meuresultado:
                 id, nome = item
-                print(f"Disciplina: {nome}")
+                print(f"ID: {id}, ",
+                    f"Disciplina: {nome}")
         case "Matricula":
             for item in meuresultado:
-                id, id_aluno, id_professor, disciplina, nota_N1, nota_N2, faltas, aprovado_sn = item
+                id, id_aluno, id_professor, disciplina, nota_N1, nota_N2, media, faltas, aprovado_sn = item
 
                 mycursor.execute(f"SELECT nome FROM TB_ALUNOS WHERE id = {id_aluno}")
                 nome_aluno = mycursor.fetchone()[0]
@@ -247,6 +251,14 @@ def read_data_on_table(tabela):
                 else:
                     nota_n2_color = Fore.GREEN
 
+                # Cor da media
+                if nota_N2 <= 5:
+                    media_color = Fore.RED
+                elif nota_N2 <= 9:
+                    media_color = Fore.YELLOW
+                else:
+                    media_color = Fore.GREEN
+
                 # Cor da Disciplina
                 match(nome_disciplina):
                     case "PHP":
@@ -263,6 +275,7 @@ def read_data_on_table(tabela):
                     f"Disciplina:{disciplina_color} {nome_disciplina}{Fore.RESET}, "
                     f"Nota N1:{nota_n1_color} {nota_N1}{Fore.RESET}, "
                     f"Nota N2:{nota_n2_color} {nota_N2}{Fore.RESET}, "
+                    f"Media:{media_color} {media_parcial}{Fore.RESET}, "
                     f"Faltas:{faltas_color} {faltas}{Fore.RESET}, "
                     f"Status:{status_color} {status}{Style.RESET_ALL}")
 
@@ -297,7 +310,7 @@ def update_data_on_table(tabela):
             else:
                 aprovado_sn = True
 
-            mycursor.execute(f"UPDATE Matricula SET id_aluno = %s, id_professor = %s, id_disciplina = %s, nota_N1 = %s, nota_N2 = %s, faltas = %s, Aprovado_SN = %s WHERE id = %s;", (id_aluno, id_professor, id_disciplina, nota_N1, nota_N2, faltas, aprovado_sn, id))
+            mycursor.execute(f"UPDATE Matricula SET id_aluno = %s, id_professor = %s, id_disciplina = %s, nota_N1 = %s, nota_N2 = %s, media = %s, faltas = %s, Aprovado_SN = %s WHERE id = %s;", (id_aluno, id_professor, id_disciplina, nota_N1, nota_N2, media_parcial, faltas, aprovado_sn, id))
             mydb.commit()
 
 # Delete
@@ -414,7 +427,7 @@ while True:
             else:
                 aprovado_sn = True
 
-            mycursor.execute("INSERT INTO Matricula (id_aluno, id_professor, id_disciplina, nota_N1, nota_N2, faltas, Aprovado_SN) VALUES (%s, %s, %s, %s, %s, %s, %s);", (id_aluno, id_professor, id_disciplina, nota_N1, nota_N2, faltas, aprovado_sn))
+            mycursor.execute("INSERT INTO Matricula (id_aluno, id_professor, id_disciplina, nota_N1, nota_N2, media, faltas, Aprovado_SN) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);", (id_aluno, id_professor, id_disciplina, nota_N1, nota_N2, media_parcial, faltas, aprovado_sn))
             mydb.commit()
             id_matricula = mycursor.lastrowid
 
@@ -455,7 +468,7 @@ while True:
                 print("Nenhum aluno foi aprovado.")
             else:
                 for item in meuresultado:
-                    id, id_aluno, id_professor, disciplina, nota_N1, nota_N2, faltas, aprovado_sn = item
+                    id, id_aluno, id_professor, disciplina, nota_N1, nota_N2, media, faltas, aprovado_sn = item
 
                     mycursor.execute(f"SELECT nome FROM TB_ALUNOS WHERE id = {id_aluno}")
                     nome_aluno = mycursor.fetchone()[0]
@@ -507,18 +520,28 @@ while True:
                     else:
                         nota_n2_color = Fore.GREEN
 
+                    # Cor da media
+                    if nota_N2 <= 5:
+                        media_color = Fore.RED
+                    elif nota_N2 <= 9:
+                        media_color = Fore.YELLOW
+                    else:
+                        media_color = Fore.GREEN
+
                     # Cor da Disciplina
                     match(nome_disciplina):
                         case "PHP":
                             disciplina_color = Fore.LIGHTBLUE_EX
                         case _:
-                            disciplina_color = Fore.WHITE
-
-                    print(f"Aluno: {nome_aluno}, "
+                            disciplina_color = ""
+                            
+                    print(f"ID: {id}, "
+                        f"Aluno: {nome_aluno}, "
                         f"Professor: {nome_professor}, "
                         f"Disciplina:{disciplina_color} {nome_disciplina}{Fore.RESET}, "
                         f"Nota N1:{nota_n1_color} {nota_N1}{Fore.RESET}, "
                         f"Nota N2:{nota_n2_color} {nota_N2}{Fore.RESET}, "
+                        f"Media:{media_color} {media_parcial}{Fore.RESET}, "
                         f"Faltas:{faltas_color} {faltas}{Fore.RESET}, "
                         f"Status:{status_color} {status}{Style.RESET_ALL}")
 
@@ -530,7 +553,7 @@ while True:
                 print("Nenhum aluno foi reprovado.")
             else:
                 for item in meuresultado:
-                    id, id_aluno, id_professor, disciplina, nota_N1, nota_N2, faltas, aprovado_sn = item
+                    id, id_aluno, id_professor, disciplina, nota_N1, nota_N2, media, faltas, aprovado_sn = item
 
                     mycursor.execute(f"SELECT nome FROM TB_ALUNOS WHERE id = {id_aluno}")
                     nome_aluno = mycursor.fetchone()[0]
@@ -582,18 +605,28 @@ while True:
                     else:
                         nota_n2_color = Fore.GREEN
 
+                    # Cor da media
+                    if nota_N2 <= 5:
+                        media_color = Fore.RED
+                    elif nota_N2 <= 9:
+                        media_color = Fore.YELLOW
+                    else:
+                        media_color = Fore.GREEN
+
                     # Cor da Disciplina
                     match(nome_disciplina):
                         case "PHP":
                             disciplina_color = Fore.LIGHTBLUE_EX
                         case _:
-                            disciplina_color = Fore.WHITE
+                            disciplina_color = ""
                             
-                    print(f"Aluno: {nome_aluno}, "
+                    print(f"ID: {id}, "
+                        f"Aluno: {nome_aluno}, "
                         f"Professor: {nome_professor}, "
                         f"Disciplina:{disciplina_color} {nome_disciplina}{Fore.RESET}, "
                         f"Nota N1:{nota_n1_color} {nota_N1}{Fore.RESET}, "
                         f"Nota N2:{nota_n2_color} {nota_N2}{Fore.RESET}, "
+                        f"Media:{media_color} {media_parcial}{Fore.RESET}, "
                         f"Faltas:{faltas_color} {faltas}{Fore.RESET}, "
                         f"Status:{status_color} {status}{Style.RESET_ALL}")
 
