@@ -199,9 +199,7 @@ def read_data_on_table(tabela):
                 mycursor.execute(f"SELECT nome FROM TB_DISCIPLINA WHERE id = {disciplina}")
                 nome_disciplina = mycursor.fetchone()[0]
 
-                media_parcial = (2 * nota_N1 + 3 * nota_N2) / 5
-
-                if media_parcial < 6.0 or faltas >= 20:
+                if media < 6.0 or faltas >= 20:
                     aprovado_sn = False
                 else:
                     aprovado_sn = True
@@ -209,11 +207,11 @@ def read_data_on_table(tabela):
                 # Nome do status após ser aprovado
                 if aprovado_sn:
                     status = "Aprovado por Média"
-                elif (not aprovado_sn) and (faltas >= 20) and (media_parcial < 6.0):
+                elif (not aprovado_sn) and (faltas >= 20) and (media < 6.0):
                     status = "Reprovado por Falta e por Média"
                 elif (not aprovado_sn) and (faltas >= 20):
                     status = "Reprovado por Falta"
-                elif (not aprovado_sn) and (media_parcial < 6.0):
+                elif (not aprovado_sn) and (media < 6.0):
                     status = "Reprovado por Média"
 
                 # Cor das Faltas
@@ -247,9 +245,9 @@ def read_data_on_table(tabela):
                     nota_n2_color = Fore.GREEN
 
                 # Cor da media
-                if nota_N2 <= 5:
+                if media <= 5:
                     media_color = Fore.RED
-                elif nota_N2 <= 9:
+                elif media <= 9:
                     media_color = Fore.YELLOW
                 else:
                     media_color = Fore.GREEN
@@ -270,7 +268,7 @@ def read_data_on_table(tabela):
                     f"Disciplina:{disciplina_color} {nome_disciplina}{Fore.RESET}, "
                     f"Nota N1:{nota_n1_color} {nota_N1}{Fore.RESET}, "
                     f"Nota N2:{nota_n2_color} {nota_N2}{Fore.RESET}, "
-                    f"Media:{media_color} {media_parcial}{Fore.RESET}, "
+                    f"Media:{media_color} {media}{Fore.RESET}, "
                     f"Faltas:{faltas_color} {faltas}{Fore.RESET}, "
                     f"Status:{status_color} {status}{Style.RESET_ALL}")
 
@@ -474,15 +472,13 @@ while True:
                     mycursor.execute(f"SELECT nome FROM TB_DISCIPLINA WHERE id = {disciplina}")
                     nome_disciplina = mycursor.fetchone()[0]
 
-                    media_parcial = (2 * nota_N1 + 3 * nota_N2) / 5
-
                     if aprovado_sn:
                         status = "Aprovado por Média"
-                    elif (not aprovado_sn) and (faltas >= 20) and (media_parcial < 6.0):
+                    elif (not aprovado_sn) and (faltas >= 20) and (media < 6.0):
                         status = "Reprovado por Falta e por Média"
                     elif (not aprovado_sn) and (faltas >= 20):
                         status = "Reprovado por Falta"
-                    elif (not aprovado_sn) and (media_parcial < 6.0):
+                    elif (not aprovado_sn) and (media < 6.0):
                         status = "Reprovado por Média"
 
                     # Cor das Faltas
@@ -516,9 +512,9 @@ while True:
                         nota_n2_color = Fore.GREEN
 
                     # Cor da media
-                    if nota_N2 <= 5:
+                    if media <= 5:
                         media_color = Fore.RED
-                    elif nota_N2 <= 9:
+                    elif media <= 9:
                         media_color = Fore.YELLOW
                     else:
                         media_color = Fore.GREEN
@@ -536,7 +532,7 @@ while True:
                         f"Disciplina:{disciplina_color} {nome_disciplina}{Fore.RESET}, "
                         f"Nota N1:{nota_n1_color} {nota_N1}{Fore.RESET}, "
                         f"Nota N2:{nota_n2_color} {nota_N2}{Fore.RESET}, "
-                        f"Media:{media_color} {media_parcial}{Fore.RESET}, "
+                        f"Media:{media_color} {media}{Fore.RESET}, "
                         f"Faltas:{faltas_color} {faltas}{Fore.RESET}, "
                         f"Status:{status_color} {status}{Style.RESET_ALL}")
 
@@ -559,15 +555,13 @@ while True:
                     mycursor.execute(f"SELECT nome FROM TB_DISCIPLINA WHERE id = {disciplina}")
                     nome_disciplina = mycursor.fetchone()[0]
 
-                    media_parcial = (2 * nota_N1 + 3 * nota_N2) / 5
-
                     if aprovado_sn:
                         status = "Aprovado por Média"
-                    elif (not aprovado_sn) and (faltas >= 20) and (media_parcial < 6.0):
+                    elif (not aprovado_sn) and (faltas >= 20) and (media < 6.0):
                         status = "Reprovado por Falta e por Média"
                     elif (not aprovado_sn) and (faltas >= 20):
                         status = "Reprovado por Falta"
-                    elif (not aprovado_sn) and (media_parcial < 6.0):
+                    elif (not aprovado_sn) and (media < 6.0):
                         status = "Reprovado por Média"
 
                     # Cor das Faltas
@@ -601,9 +595,9 @@ while True:
                         nota_n2_color = Fore.GREEN
 
                     # Cor da media
-                    if nota_N2 <= 5:
+                    if media <= 5:
                         media_color = Fore.RED
-                    elif nota_N2 <= 9:
+                    elif media <= 9:
                         media_color = Fore.YELLOW
                     else:
                         media_color = Fore.GREEN
@@ -621,7 +615,7 @@ while True:
                         f"Disciplina:{disciplina_color} {nome_disciplina}{Fore.RESET}, "
                         f"Nota N1:{nota_n1_color} {nota_N1}{Fore.RESET}, "
                         f"Nota N2:{nota_n2_color} {nota_N2}{Fore.RESET}, "
-                        f"Media:{media_color} {media_parcial}{Fore.RESET}, "
+                        f"Media:{media_color} {media}{Fore.RESET}, "
                         f"Faltas:{faltas_color} {faltas}{Fore.RESET}, "
                         f"Status:{status_color} {status}{Style.RESET_ALL}")
 
