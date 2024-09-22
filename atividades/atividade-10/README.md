@@ -4,12 +4,6 @@
 
 Crie um Banco de Dados envolvendo quatro tabelas. Uma tabela é um Cadastro (por exemplo `TB_ALUNO`), uma outra tabela é cadastro (por exemplo `TB_DISCIPLINA`) e uma outra também é cadastro (por `TB_PROFESSOR`). A quarta tabela `Matricula` se relaciona com as tabelas Aluno, Professor e Disciplina. Na tabela Matricula existirão chaves estrangeiras para Aluno, Professor e Disciplina. na tabela Matricula existirão atributos com as notas N1, N2 e Faltas. Criar instruções SQL com CRUD para as 4 tabelas. Implementar um código Python para ler a tabela Matricula e listar o status de aprovação dos alunos Matriculados.
 
-Criar scripts sql para para prova Prática
-1) Listar todos os aluno reprovados. Nome do Aluno, Nome da Disciplina, Nome do Professor, N1,N2,Média,Faltas, Status da reprovação("`Reprovado por Média`", "`Reprovado por Falta`") 
-2) Listar todos os alunos aprovados. Nome Aluno, Nome da Disciplina, Nome do Professor, N1,N2,Média,Faltas, Status da reprovação("`Aprovado por Média`"); 
-3) Listar a Quantidade de alunos aprovados;
-4) Listar a Quantidade de alunos reprovados;
-
 Antes de executar o arquivo `.py`, você precisa baixar um "driver de banco de dados" para o Python:
 
 ```bash
@@ -47,16 +41,17 @@ mycursor.execute("""CREATE TABLE IF NOT EXISTS TB_DISCIPLINA (
 
 mycursor.execute("""CREATE TABLE IF NOT EXISTS Matricula (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nome_aluno INT,
-    nome_professor INT,
-    disciplina INT,
+    id_aluno INT,
+    id_professor INT,
+    id_disciplina INT,
     nota_N1 FLOAT,
     nota_N2 FLOAT,
+    media FLOAT,
     faltas INT,
     Aprovado_SN BOOLEAN,
-    FOREIGN KEY (nome_aluno) REFERENCES TB_ALUNOS(id),
-    FOREIGN KEY (nome_professor) REFERENCES TB_PROFESSOR(id),
-    FOREIGN KEY (disciplina) REFERENCES TB_DISCIPLINA(id)
+    FOREIGN KEY (id_aluno) REFERENCES TB_ALUNOS(id),
+    FOREIGN KEY (id_professor) REFERENCES TB_PROFESSOR(id),
+    FOREIGN KEY (id_disciplina) REFERENCES TB_DISCIPLINA(id)
 );""")
 
 mydb.commit()
@@ -69,18 +64,6 @@ print("Matricula foi criado")
 mycursor.close()
 mydb.close()
 ```
-
----
-
-Agora, para um CRUD completo, onde o usuário pode interagir com o banco de dados
-
-Você precisa também baixar uma biblioteca para o sistema de cores em Python:
-
-```bash
-pip install mysql-connector-python colorama
-```
-
-O código Python é [esse](https://github.com/marshfellow42/bd-info-241/blob/main/atividades/atividade-10/script.py)
 
 ## Como executar o código Python no [Play with Docker](https://labs.play-with-docker.com/)?
 
