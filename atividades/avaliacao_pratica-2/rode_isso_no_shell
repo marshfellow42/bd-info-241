@@ -71,7 +71,7 @@ cat <<EOF > progress_bar.py
 import time
 from tqdm import tqdm
 
-total_time = 60
+total_time = 20
 interval = 0.1
 
 for _ in tqdm(range(int(total_time / interval)), desc="Iniciando o servidor MySQL", bar_format="{l_bar}{bar}"):
